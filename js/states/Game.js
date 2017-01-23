@@ -2,6 +2,7 @@ var MrHop = MrHop || {}
 
 MrHop.GameState = {
   init: function() {
+
     this.floorPool = this.add.group()
 
     this.platformPool = this.add.group()
@@ -39,7 +40,7 @@ MrHop.GameState = {
 
     //coin sound
     this.coinSound = this.add.audio('coin')
-    this.coinSound.volume = 0.35
+    this.coinSound.volume = 0.25
 
     this.loadLevel()
 

@@ -22,8 +22,8 @@ MrHop.PreloadState = {
   },
   create: function() {
     var audio = this.game.add.audio('jungle_map')
-    audio.volume = 0.6
-    audio.play()
+    audio.loop = true
+    audio.loopFull(0.7)
 
     this.state.start('Game');
   }
