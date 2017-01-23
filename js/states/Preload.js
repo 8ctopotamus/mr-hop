@@ -18,7 +18,7 @@ MrHop.PreloadState = {
     this.load.image('background', 'assets/images/background.png');
     this.load.spritesheet('player', 'assets/images/player_spritesheet.png', 51, 67, 5, 2, 3);
     this.load.audio('coin', ['assets/audio/coin.mp3', 'assets/audio/coin.ogg']);
-    this.load.audio('jungle_map', ['assets/audio/jungle-map-jack-tell.mp3', 'jungle-map-jack-tell.ogg']);
+    this.load.audio('jungle_map', ['assets/audio/jungle-map-jack-tell.mp3', 'assets/audio/jungle-map-jack-tell.ogg']);
   },
   create: function() {
     var audio = this.game.add.audio('jungle_map')
