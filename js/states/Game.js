@@ -39,6 +39,7 @@ MrHop.GameState = {
 
     //coin sound
     this.coinSound = this.add.audio('coin')
+    this.coinSound.volume = 0.35
 
     this.loadLevel()
 
