@@ -1,0 +1,70 @@
+var MrHop = MrHop || {};
+
+MrHop.GameState = {
+  init: function() {
+    //pool of floors
+    this.floorPool = this.add.group()
+
+    //pool of platforms
+    this.platformPool = this.add.group()
+
+    //gravity
+    this.game.physics.arcade.gravity.y = 1000
+
+    this.maxJumpDistance = 120
+
+    this.cursors = this.game.input.keyboard.createCursorKeys()
+
+    //coins
+    this.myCoins = 0
+  },
+  create: function() {
+    this.player = this.add.sprite(50, 50, 'player')
+    this.player.anchor.setTo(0.5)
+    this.player.animations.add('running', [0, 1, 2, 3, 2 ,1], 15, true)
+    this.game.physics.arcade.enable(this.player)
+    this.player.body.setSize(38, 60, 0, 0) // change player bounding box
+    this.player.play('running')
+
+    //hard-code first platform
+    this.platform = new MrHop.Platform(this.game, this.floorPool, 13, 10, 200);
+    this.platformPool.add(this.platform);
+  },
+  update: function() {
+    this.platformPool.forEachAlive(function(platform, index) {
+      this.game.physics.arcade.collide(this.player, platform)
+    }, this)
+
+    if(this.cursors.up.isDown || this.game.input.activePointer.isDown) {
+      this.playerJump()
+    }
+    else if (this.cursors.up.isDown || this.game.input.activePointer.isDown) {
+      this.isJumping = false
+    }
+  },
+  playerJump: function() {
+    if(this.player.body.touching.down) {
+      //starting point of jump
+      this.startJumpY = this.player.y
+
+      //keep track f the fack that it is jumping
+      this.isJumping = true
+      this.jumpPeaked = false
+
+      this.player.body.velocity.y = -300
+    }
+    else if (this.isJumping && !this.jumpPeaked) {
+      var distanceJumped = this.startJumpY - this.player.y
+
+      if (distanceJumped <= this.maxJumpDistance) {
+        this.player.body.velocity.y = -300
+      } else {
+        this.jumpPeaked = true
+      }
+    }
+  },
+  // render: function() {
+  //   this.game.debug.body(this.player)
+  //   this.game.debug.bodyInfo(this.player, 0, 0)
+  // }
+};
